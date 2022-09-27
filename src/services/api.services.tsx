@@ -1,6 +1,6 @@
 import {sleep} from '../helpers';
 
-const USER = 'Moos';
+const USER = 'Task';
 const PASS = '123';
 
 export async function signUp(
