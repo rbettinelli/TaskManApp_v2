@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
-import {Image, TouchableOpacity, View, Text, TextInput} from 'react-native';
+import {
+  Image,
+  Alert,
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+} from 'react-native';
 import styles from '../styles/AppStyle';
-import {signInAsync} from '../services/api.services';
+import {signIn} from '../services/api.services';
+import {validateEmail} from '../helpers';
 
 const LoginPage = (props: any) => {
   const {navigation} = props;
@@ -10,34 +18,32 @@ const LoginPage = (props: any) => {
   const [status, setStatus] = useState('');
 
   async function doLogin() {
-    const result = await signInAsync(user, pass);
-    if (result === 'SUCCESS') {
-      setStatus('Login!');
-      navigation.navigate('AfterLogin', {username: user});
-    } else {
-      setStatus(result);
+    if (user.length <= 0) {
+      Alert.alert('Email Missing');
+      return;
     }
-
-    //Search Function.
-    /*     var sp = 'spg_getUser';
-    var myMap = new Map();
-    myMap.set('user', user);
-    myMap.set('pass', pass);
-    var url = CallJson(sp, myMap);
-    console.log(url);
-
-    const [responses, isError, isLoading] = useFetch<JSON>(url);
-
-    if (isLoading) {
-      console.log('Loading');
+    if (!validateEmail(user)) {
+      Alert.alert('Not a valid eMail');
+      return;
     }
-    if (isError) {
-      console.log('Error');
+    if (pass.length <= 0) {
+      Alert.alert('Password Missing');
+      return;
     }
-    var resp = responses;
-    console.log(resp);
-    console.log(text);
-    navigation.navigate('AfterLogin', {username: user}); */
+    setStatus('Checking Credentials....');
+    signIn(user, pass)
+      .then(() => {
+        console.log('User account signed in!');
+        navigation.navigate('AfterLogin', {username: user});
+      })
+      .catch(error => {
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+          Alert.alert('Invalid Email');
+        }
+        Alert.alert('Error:$(error)');
+      });
+    return;
   }
 
   return (
@@ -51,7 +57,9 @@ const LoginPage = (props: any) => {
       <View>
         <Text style={styles.textTitle}>Task Manager v2.0</Text>
       </View>
+
       <View style={styles.loginBox}>
+        <Text>Enter Existing Credentials to Login</Text>
         <TextInput
           style={styles.input}
           placeholder="e-Mail"

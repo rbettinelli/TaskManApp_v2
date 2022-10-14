@@ -41,7 +41,7 @@ export default StyleSheet.create({
   },
   topBox: {
     padding: 30,
-    height: '55%',
+    height: '50%',
     alignItems: 'center',
   },
   botBox: {
@@ -57,7 +57,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 2,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     width: 100,
     alignItems: 'center',
   },
