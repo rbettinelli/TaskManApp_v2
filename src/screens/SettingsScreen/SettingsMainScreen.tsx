@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SettingsMainScreen = () => {
   const [randomColor, setRandomColor] = useState('rgb(32,0,0)');
@@ -11,7 +11,7 @@ const SettingsMainScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.wrapper, {backgroundColor: randomColor}]}>
+    <SafeAreaView style={[styles.wrapper, { backgroundColor: randomColor }]}>
       <TouchableOpacity style={styles.topBox} onPress={changeBackgroundColor}>
         <Text style={styles.textStyle}>Change Background Color Randomly</Text>
       </TouchableOpacity>

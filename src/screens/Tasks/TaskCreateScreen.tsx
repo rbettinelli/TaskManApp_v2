@@ -1,17 +1,17 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
+import { userName } from '../../services/api.services';
 
 const TaskCreateScreen = (props: any) => {
-  const {route, navigation} = props;
-  const {username} = route.params;
+  const { navigation } = props;
 
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>Task Manager - {username} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName} `}</Text>
       </PageHeader>
       <View style={styles.topBox}>
         <Text style={styles.textStyle}>Task Name:</Text>

@@ -1,12 +1,14 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   wrapper: {
+    display: 'flex',
     flex: 1,
   },
   imageDisplay: {
-    height: '100%',
-    width: '100%',
+    height: 200,
+    width: 200,
+    alignSelf: 'center'
   },
   cent: {
     alignItems: 'center',
@@ -23,30 +25,45 @@ export default StyleSheet.create({
     padding: 30,
     alignItems: 'center',
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
+  inputWrapper: {
+    display: 'flex',
+    width: "80%",
+    alignItems: 'center',
     padding: 10,
+    marginBottom: 7
+  },
+
+  input: {
+    width: '100%',
+    padding: 15,
+    borderWidth: 1,
     borderRadius: 10,
-    width: 200,
+  },
+  inputError: {
+    borderColor: "red"
+  },
+  errorText: {
+    color: 'red',
+    alignSelf: 'flex-start'
   },
   loginBox: {
     padding: 30,
     alignItems: 'center',
   },
   openPageBox: {
-    height: '65%',
+    height: '50%',
     alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex'
   },
   topBox: {
     padding: 30,
-    height: '50%',
-    alignItems: 'center',
+    height: '40%',
+    alignItems: 'center'
   },
   botBox: {
-    justifyContent: 'flex-end',
     padding: 30,
+    justifyContent: 'center'
   },
   navButtonsWrapper: {
     flexDirection: 'row',

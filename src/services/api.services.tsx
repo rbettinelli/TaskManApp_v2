@@ -1,29 +1,19 @@
-import {sleep} from '../helpers';
 import auth from '@react-native-firebase/auth';
 
-const USER = 'Task';
-const PASS = '123';
-
-export async function signUp(
-  username: string,
+export const signUpUser = async (
+  email: string,
   password: string,
-  callback: any,
-) {
-  await sleep(2000);
-  if (username === USER && password === PASS) {
-    callback('SUCCESS');
-  } else {
-    callback('Login Failed');
-  }
+  userName: string
+): Promise<any> => {
+  return auth().createUserWithEmailAndPassword(email, password).then((user) => {
+    user.user.updateProfile({
+      displayName: userName
+    })
+  })
 }
 
-export async function signUpUser(
-  username: string,
-  password: string,
-): Promise<any> {
-  return auth().createUserWithEmailAndPassword(username, password);
-}
-
-export async function signIn(username: string, password: string): Promise<any> {
+export const signIn = async (username: string, password: string): Promise<any> => {
   return auth().signInWithEmailAndPassword(username, password);
 }
+
+export const userName = auth().currentUser?.displayName

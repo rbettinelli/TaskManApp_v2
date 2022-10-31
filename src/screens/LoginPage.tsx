@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   Alert,
@@ -6,44 +6,69 @@ import {
   View,
   Text,
   TextInput,
+  ScrollView
 } from 'react-native';
 import styles from '../styles/AppStyle';
-import {signIn} from '../services/api.services';
-import {validateEmail} from '../helpers';
+import { signIn } from '../services/api.services';
+import { validateEmail } from '../helpers';
 
 const LoginPage = (props: any) => {
-  const {navigation} = props;
-  const [user, setUser] = useState('none');
-  const [pass, setPass] = useState('none');
+  const { navigation } = props;
+  const [firstRender, setFirstRender] = useState(true);
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
   const [status, setStatus] = useState('');
 
-  async function doLogin() {
-    if (user.length <= 0) {
-      Alert.alert('Email Missing');
-      return;
+  const [emailError, setEmailError] = useState<null | string>("")
+  const [passwordError, setPasswordError] = useState<null | string>("")
+
+
+
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false)
     }
-    if (!validateEmail(user)) {
-      Alert.alert('Not a valid eMail');
-      return;
+    if (!firstRender) {
+      if (!(passwordError === null || emailError === null)) {
+        return;
+      }
+
+      setStatus('Checking Credentials....');
+      signIn(user, pass)
+        .then(() => {
+          console.log('User account signed in!');
+          navigation.navigate('AfterLogin');
+        })
+        .catch(error => {
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+            Alert.alert('Invalid Email');
+          }
+          if (error.code === 'auth/user-not-found') {
+            Alert.alert('User Not Found!');
+          }
+        });
+    }
+  }, [emailError, passwordError])
+
+
+
+  const doLogin = () => {
+    if (user.length <= 0 || !validateEmail(user)) {
+      if (user.length <= 0) {
+        setEmailError('Email Missing')
+      }
+      else if (!validateEmail(user)) {
+        setEmailError('Not a valid eMail')
+      }
+    } else {
+      setEmailError(null)
     }
     if (pass.length <= 0) {
-      Alert.alert('Password Missing');
-      return;
+      setPasswordError('Password Missing')
+    } else {
+      setPasswordError(null)
     }
-    setStatus('Checking Credentials....');
-    signIn(user, pass)
-      .then(() => {
-        console.log('User account signed in!');
-        navigation.navigate('AfterLogin', {username: user});
-      })
-      .catch(error => {
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-          Alert.alert('Invalid Email');
-        }
-        Alert.alert('Error:$(error)');
-      });
-    return;
   }
 
   return (
@@ -57,47 +82,55 @@ const LoginPage = (props: any) => {
       <View>
         <Text style={styles.textTitle}>Task Manager v2.0</Text>
       </View>
-
-      <View style={styles.loginBox}>
-        <Text>Enter Existing Credentials to Login</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e-Mail"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-          onChangeText={text => {
-            setUser(text);
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry={true}
-          onChangeText={text => {
-            setPass(text);
-          }}
-        />
-        <Text>{status}</Text>
-      </View>
-      <View style={styles.botBox}>
-        <View style={styles.navButtonsWrapper}>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <Text style={styles.buttonFont}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => {
-              doLogin();
-            }}>
-            <Text style={styles.buttonFont}>Login</Text>
-          </TouchableOpacity>
+      <ScrollView style={styles.wrapper}>
+        <View style={styles.loginBox}>
+          <Text>Enter Existing Credentials to Login</Text>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={[styles.input, !!emailError && styles.inputError]}
+              placeholder="e-Mail"
+              textContentType="emailAddress"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={text => {
+                setUser(text);
+              }}
+            />
+            {emailError && emailError.length > 0 && <Text style={styles.errorText}>{emailError}</Text>}
+          </View>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={[styles.input, !!passwordError && styles.inputError]}
+              placeholder="Password"
+              textContentType="password"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setPass(text);
+              }}
+            />
+            {passwordError && passwordError.length > 0 && <Text style={styles.errorText}>{passwordError}</Text>}
+          </View>
+          <Text>{status}</Text>
         </View>
-      </View>
+        <View>
+          <View style={styles.navButtonsWrapper}>
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Text style={styles.buttonFont}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() => {
+                doLogin();
+              }}>
+              <Text style={styles.buttonFont}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };

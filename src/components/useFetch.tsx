@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-function useFetch(sp: string, obj: Map<string, Object>) {
+const useFetch = (sp: string, obj: Map<string, Object>) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -36,7 +36,7 @@ function useFetch(sp: string, obj: Map<string, Object>) {
       .catch(err => setError(err));
   }, [url]);
 
-  return {data, error};
+  return { data, error };
 }
 
 export default useFetch;

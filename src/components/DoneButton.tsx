@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function DoneButton(props: {
+const DoneButton = (props: {
   title:
-    | boolean
-    | React.ReactChild
-    | React.ReactFragment
-    | React.ReactPortal
-    | null
-    | undefined;
-}) {
+  | boolean
+  | React.ReactChild
+  | React.ReactFragment
+  | React.ReactPortal
+  | null
+  | undefined;
+}) => {
   return (
     <TouchableOpacity>
       <View style={styles.addWrapper}>

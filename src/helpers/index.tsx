@@ -1,6 +1,6 @@
-export function sleep(ms: any) {
+export const sleep = (ms: any) => {
   return new Promise(resolve => {
-    setTimeout(resolve, ms);
+    setTimeout(resolve as () => void, ms);
   });
 }
 

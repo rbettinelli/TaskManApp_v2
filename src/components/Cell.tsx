@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Icons from '../assets/icons';
 
 interface CellProps {
@@ -7,7 +7,7 @@ interface CellProps {
   checked: Boolean;
 }
 
-const Cell: React.FC<CellProps> = ({label, checked}) => {
+const Cell: React.FC<CellProps> = ({ label, checked }) => {
   return (
     <View style={styles.cellList}>
       <View style={styles.leftItem}>

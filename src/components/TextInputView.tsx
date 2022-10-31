@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, TouchableOpacity} from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles/AppStyle';
 
 const CustomTextInput = (props: any) => {

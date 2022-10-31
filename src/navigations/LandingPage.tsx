@@ -1,12 +1,9 @@
 import React from 'react';
-import {Image, TouchableOpacity, View, Text} from 'react-native';
-//import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Image, TouchableOpacity, View, Text } from 'react-native';
 import styles from '../styles/AppStyle';
 
-//const Stack = createNativeStackNavigator();
-
 const LandingPageMain = (props: any) => {
-  const {navigation} = props;
+  const { navigation } = props;
 
   return (
     <View style={styles.wrapper}>

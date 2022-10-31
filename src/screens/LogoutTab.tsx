@@ -1,23 +1,22 @@
 import React from 'react';
-import {Image, TouchableOpacity, View, Text, Alert} from 'react-native';
+import { Image, TouchableOpacity, View, Text, Alert } from 'react-native';
 import PageHeader from '../components/Header';
 import styles from '../styles/AppStyle';
-
+import { userName } from '../services/api.services';
 const LogoutTab = (props: any) => {
-  const {route, navigation} = props;
-  const {username} = route.params;
+  const { navigation } = props;
 
   const signOut = () => {
     navigation.reset({
       index: 0,
-      routes: [{name: 'Landing'}],
+      routes: [{ name: 'Landing' }],
     });
   };
 
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>Task Manager - {username} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName}`} </Text>
       </PageHeader>
       <View style={styles.topBox}>
         <Image
