@@ -11,7 +11,7 @@ const TaskCreateScreen = (props: any) => {
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>{`Task Manager - ${userName} `}</Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName()} `}</Text>
       </PageHeader>
       <View style={styles.topBox}>
         <Text style={styles.textStyle}>Task Name:</Text>

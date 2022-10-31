@@ -21,4 +21,4 @@ export const Logout = (): Promise<any> => {
     .signOut()
 };
 
-export const userName = auth().currentUser?.displayName
+export const userName = (): string => auth().currentUser?.displayName || "";

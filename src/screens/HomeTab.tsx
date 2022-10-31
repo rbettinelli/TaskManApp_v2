@@ -7,7 +7,7 @@ const HomeTab = (props: any) => {
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>{`Task Manager - ${userName}`} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName()}`} </Text>
       </PageHeader>
       <Text> Task Manager .. Your easy 'to do' manager. </Text>
     </View>

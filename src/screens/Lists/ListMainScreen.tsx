@@ -24,7 +24,7 @@ const ListMainScreenBusiness = (props: any) => {
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>{`Task Manager - ${userName}`} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName()}`} </Text>
       </PageHeader>
 
       <View style={styles.plusBox}>
