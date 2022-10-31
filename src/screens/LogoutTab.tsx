@@ -2,15 +2,17 @@ import React from 'react';
 import { Image, TouchableOpacity, View, Text, Alert } from 'react-native';
 import PageHeader from '../components/Header';
 import styles from '../styles/AppStyle';
-import { userName } from '../services/api.services';
+import { Logout, userName } from '../services/api.services';
 const LogoutTab = (props: any) => {
   const { navigation } = props;
 
   const signOut = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Landing' }],
-    });
+    Logout().then(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Landing' }],
+      });
+    })
   };
 
   return (

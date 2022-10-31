@@ -16,4 +16,9 @@ export const signIn = async (username: string, password: string): Promise<any> =
   return auth().signInWithEmailAndPassword(username, password);
 }
 
+export const Logout = (): Promise<any> => {
+  return auth()
+    .signOut()
+};
+
 export const userName = auth().currentUser?.displayName

@@ -12,7 +12,7 @@ const MainStack = createNativeStackNavigator();
 
 const App = () => {
 
-  let initialRouteName = 'Login';
+  let initialRouteName = 'Landing';
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -32,14 +32,14 @@ const App = () => {
   if (initializing) return null;
 
   if (!user) {
-    initialRouteName = 'Login';
+    initialRouteName = 'Landing';
   } else {
-    initialRouteName = 'DrawerNavigationDelegate';
+    initialRouteName = 'AfterLogin';
   }
   return (
     <NavigationContainer>
       <MainStack.Navigator
-        initialRouteName="Landing"
+        initialRouteName={initialRouteName}
         screenOptions={{
           headerShown: false,
         }}>
