@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
 const PageHeader = (props: any) => {
-  const {children} = props;
+  const { children } = props;
   return <View>{children}</View>;
 };
 

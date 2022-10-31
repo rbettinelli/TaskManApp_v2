@@ -1,14 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
+import { userName } from '../../services/api.services';
 
-// const Stack = createStackNavigator();
-
-const ListCreateScreen = (props: any) => {
-  const {route} = props;
-  const {username} = route.params;
+const ListCreateScreen = () => {
 
   const setQuery = (text: string) => {
     //Search Function.
@@ -18,7 +15,7 @@ const ListCreateScreen = (props: any) => {
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>Task Manager - {username} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName()}`} </Text>
       </PageHeader>
       <View style={styles.searchBox}>
         <Text style={styles.textStyle}>List Name:</Text>

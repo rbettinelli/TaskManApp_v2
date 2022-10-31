@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-function useFetch<T>(url: string) {
-  const [responses, setResponses] = useState<T[] | null>();
+const useFetch = (url: string) => {
+  const [responses, setResponses] = useState<[] | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -20,7 +20,7 @@ function useFetch<T>(url: string) {
         setIsError(true);
         setResponses(null);
       });
-    return () => {};
+    return () => { };
   }, [url]);
 
   return [responses, isLoading, isError] as const;

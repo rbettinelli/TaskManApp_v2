@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "909081014700",
+    "project_id": "taskmanappv2",
+    "storage_bucket": "taskmanappv2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909081014700:android:68b0976866cde6ffc78a09",
+        "android_client_info": {
+          "package_name": "com.taskmanapp_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909081014700-rrasuih3nvtbcteb70ae6gg0qp8rf925.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA690xfaWMfToxUaFscyUW5VLE0OaYvyuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909081014700-rrasuih3nvtbcteb70ae6gg0qp8rf925.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "909081014700-r422do52ad883g2qd4pgsn1bnt4o31ta.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.disruptors.gc.TaskManAppv2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

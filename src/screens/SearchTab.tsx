@@ -1,12 +1,9 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import PageHeader from '../components/Header';
 import styles from '../styles/AppStyle';
-
-const SearchTab = (props: any) => {
-  const {route} = props;
-  const {username} = route.params;
-
+import { userName } from '../services/api.services';
+const SearchTab = () => {
   const setQuery = (text: string) => {
     //Search Function.
     console.log(text);
@@ -15,7 +12,7 @@ const SearchTab = (props: any) => {
   return (
     <View style={styles.wrapper}>
       <PageHeader>
-        <Text style={styles.textTitle}>Task Manager - {username} </Text>
+        <Text style={styles.textTitle}>{`Task Manager - ${userName()}`}</Text>
       </PageHeader>
       <View style={styles.searchBox}>
         <TextInput
