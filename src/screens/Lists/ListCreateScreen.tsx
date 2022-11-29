@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
 import { userName } from '../../services/api.services';
 
-const ListCreateScreen = () => {
+const ListCreateScreen = ({ navigation }: any) => {
 
   const setQuery = (text: string) => {
     //Search Function.
@@ -13,7 +13,7 @@ const ListCreateScreen = () => {
   };
 
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <PageHeader>
         <Text style={styles.textTitle}>{`Task Manager - ${userName()}`} </Text>
       </PageHeader>
@@ -21,11 +21,23 @@ const ListCreateScreen = () => {
         <Text style={styles.textStyle}>List Name:</Text>
         <TextInputView
           style={styles.input}
-          placeholder="Search..."
+          placeholder="Create List"
           onChangeText={(text: string) => setQuery(text)}
         />
+        <View style={styles.loginBox}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => Alert.alert("go back to task list")}>
+            <Text style={styles.buttonFont}>Add</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => navigation.goBack()}>
+            <Text style={styles.buttonFont}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
