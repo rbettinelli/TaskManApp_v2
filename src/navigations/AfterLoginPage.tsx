@@ -6,13 +6,16 @@ import TaskCreateScreen from '../screens/Tasks/TaskCreateScreen';
 import ListCreateScreen from '../screens/Lists/ListCreateScreen';
 import ListMainScreen from '../screens/Lists/ListMainScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import StatisticsMainScreen from '../screens/Statistics/StatisticsMainScreen';
 const Tabs = createBottomTabNavigator();
 Icon.loadFont();
 
 const AfterLoginPage = () => {
   return (
-    <Tabs.Navigator>
-      <Tabs.Screen
+    <Tabs.Navigator screenOptions={{
+      headerShown: false,
+    }}>
+      {/* <Tabs.Screen
         name="route-tMain"
         component={TaskMainScreen}
         options={{
@@ -21,8 +24,8 @@ const AfterLoginPage = () => {
             <Icon name="format-list-group" size={24} color={color} />
           ),
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="route-tCreate"
         component={TaskCreateScreen}
         options={{
@@ -31,7 +34,7 @@ const AfterLoginPage = () => {
             <Icon name="format-list-checks" size={24} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="route-lMain"
         component={ListMainScreen}
@@ -43,6 +46,16 @@ const AfterLoginPage = () => {
         }}
       />
       <Tabs.Screen
+        name="Statistics"
+        component={StatisticsMainScreen}
+        options={{
+          title: 'Stats',
+          tabBarIcon: ({ color }: any) => {
+            return <Icon name="bar-chart" color={color} />;
+          },
+        }}
+      />
+      {/* <Tabs.Screen
         name="route-lCreate"
         component={ListCreateScreen}
         options={{
@@ -51,7 +64,7 @@ const AfterLoginPage = () => {
             <Icon name="format-list-checkbox" size={24} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="route-logout"
         component={LogoutTab}

@@ -11,9 +11,9 @@ const ListNavigator = () => {
   return (
     <ListStack.Navigator screenOptions={{ headerShown: false }}>
       <ListStack.Screen name="ListMainScreen" component={ListMainScreen} />
-      <ListStack.Screen name="ListCreate" component={ListCreateScreen} />
-      <ListStack.Screen name="TaskMainScreen" component={TaskMainScreen} />
-      <ListStack.Screen name="TaskCreate" component={TaskCreateScreen} />
+      {/* <ListStack.Screen name="ListCreate" component={ListCreateScreen} /> */}
+      {/* <ListStack.Screen name="TaskMainScreen" component={TaskMainScreen} /> */}
+      {/* <ListStack.Screen name="TaskCreate" component={TaskCreateScreen} /> */}
     </ListStack.Navigator>
   );
 }

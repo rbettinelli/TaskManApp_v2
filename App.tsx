@@ -6,6 +6,9 @@ import LoginPage from './src/screens/LoginPage';
 import SignUpPage from './src/screens/SignUpPage';
 import AfterLoginPage from './src/navigations/AfterLoginPage';
 import auth from '@react-native-firebase/auth';
+import TaskCreateScreen from './src/screens/Tasks/TaskCreateScreen';
+import ListCreateScreen from './src/screens/Lists/ListCreateScreen';
+import TaskMainScreen from './src/screens/Tasks/TasksMainScreen';
 const MainStack = createNativeStackNavigator();
 
 
@@ -58,6 +61,9 @@ const App = () => {
 
         {/* logged in pages */}
         <MainStack.Screen name="AfterLogin" component={AfterLoginPage} />
+        <MainStack.Screen name="CreateTask" component={TaskCreateScreen} />
+        <MainStack.Screen name="CreateList" component={ListCreateScreen} />
+        <MainStack.Screen name="TaskMain" component={TaskMainScreen} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

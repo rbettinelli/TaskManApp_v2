@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={ListNavigator}
         options={{
@@ -18,8 +18,8 @@ const TabNavigator = () => {
             return <Icon name="list" color={color} size={size} />;
           },
         }}
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Statistics"
         component={StatisticsMainScreen}
         options={{
@@ -27,7 +27,7 @@ const TabNavigator = () => {
             return <Icon name="bar-chart" color={color} size={size} />;
           },
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Settings"
         component={SettingsMainScreen}

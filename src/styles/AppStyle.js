@@ -4,6 +4,7 @@ export default StyleSheet.create({
   wrapper: {
     display: 'flex',
     flex: 1,
+    width: "100%"
   },
   imageDisplay: {
     height: 200,
@@ -30,7 +31,7 @@ export default StyleSheet.create({
     width: "80%",
     alignItems: 'center',
     padding: 10,
-    marginBottom: 7
+    marginHorizontal: 20
   },
 
   input: {
@@ -59,7 +60,8 @@ export default StyleSheet.create({
   topBox: {
     padding: 30,
     height: '40%',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: "100%"
   },
   botBox: {
     padding: 30,

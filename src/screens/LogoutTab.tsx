@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, TouchableOpacity, View, Text, Alert } from 'react-native';
+import { Image, TouchableOpacity, View, Text, Alert, SafeAreaView } from 'react-native';
 import PageHeader from '../components/Header';
 import styles from '../styles/AppStyle';
 import { Logout, userName } from '../services/api.services';
@@ -16,7 +16,7 @@ const LogoutTab = (props: any) => {
   };
 
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <PageHeader>
         <Text style={styles.textTitle}>{`Task Manager - ${userName()}`} </Text>
       </PageHeader>
@@ -49,7 +49,7 @@ const LogoutTab = (props: any) => {
           <Text style={styles.buttonFont}>Logout</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

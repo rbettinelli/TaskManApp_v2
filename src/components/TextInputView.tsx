@@ -4,11 +4,9 @@ import styles from '../styles/AppStyle';
 
 const CustomTextInput = (props: any) => {
   return (
-    <TouchableOpacity>
-      <View>
-        <TextInput style={styles.input} placeholder={props.placeHolder} />
-      </View>
-    </TouchableOpacity>
+    <View style={styles.inputWrapper}>
+      <TextInput style={styles.input} placeholder={props.placeholder} />
+    </View>
   );
 };
 
