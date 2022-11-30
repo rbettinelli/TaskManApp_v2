@@ -4,7 +4,8 @@ import Cell from '../../components/Cell';
 import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
-import { userName } from '../../services/api.services';
+import { useBackend } from '../../providers/BackendProvider';
+
 const tasks: { [key: string]: any } = {
   list1: [
     { name: 'Task 1', id: '1', selected: false },
@@ -31,6 +32,7 @@ const tasks: { [key: string]: any } = {
 const TaskMainScreen = (props: any) => {
   const { navigation, route } = props;
   const { taskID } = route.params
+  const { userName } = useBackend()
 
   // Replace this with API...
   const [taskList, settaskList] = useState<Array<any>>(tasks[taskID]);

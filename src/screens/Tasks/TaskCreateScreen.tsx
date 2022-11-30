@@ -3,10 +3,11 @@ import { View, Text, TouchableOpacity, SafeAreaView, Alert } from 'react-native'
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
-import { userName } from '../../services/api.services';
+import { useBackend } from '../../providers/BackendProvider';
 
 const TaskCreateScreen = (props: any) => {
   const { navigation } = props;
+  const { userName } = useBackend()
 
   return (
     <SafeAreaView style={styles.wrapper}>

@@ -9,10 +9,11 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from '../styles/AppStyle';
-import { signUpUser } from '../services/api.services';
 import { validateEmail } from '../helpers';
+import { useBackend } from '../providers/BackendProvider';
 
 const SignUpPage = (props: any) => {
+  const { signUpUser } = useBackend()
   const [firstRender, setFirstRender] = useState(true);
   const { navigation } = props;
   const [user, setUser] = useState('');

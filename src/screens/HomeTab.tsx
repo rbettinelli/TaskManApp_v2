@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import PageHeader from '../components/Header';
+import { useBackend } from '../providers/BackendProvider';
 import styles from '../styles/AppStyle';
-import { userName } from '../services/api.services';
 const HomeTab = (props: any) => {
+  const { userName } = useBackend()
   return (
     <View style={styles.wrapper}>
       <PageHeader>

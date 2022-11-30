@@ -4,9 +4,10 @@ import CellList from '../../components/CellList';
 import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
-import { userName } from '../../services/api.services';
+import { useBackend } from '../../providers/BackendProvider';
 const ListMainScreenBusiness = (props: any) => {
   const { navigation } = props;
+  const { userName } = useBackend()
 
   // Replace this with API...
   const [listList, setlistList] = useState([

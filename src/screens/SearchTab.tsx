@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import PageHeader from '../components/Header';
+import { useBackend } from '../providers/BackendProvider';
 import styles from '../styles/AppStyle';
-import { userName } from '../services/api.services';
 const SearchTab = () => {
+  const { userName } = useBackend()
   const setQuery = (text: string) => {
     //Search Function.
     console.log(text);

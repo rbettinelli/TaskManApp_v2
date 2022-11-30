@@ -3,9 +3,10 @@ import { View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
-import { userName } from '../../services/api.services';
+import { useBackend } from '../../providers/BackendProvider';
 
 const ListCreateScreen = ({ navigation }: any) => {
+  const { userName } = useBackend()
 
   const setQuery = (text: string) => {
     //Search Function.

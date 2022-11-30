@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LandingPageMain from './src/navigations/LandingPage';
@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import TaskCreateScreen from './src/screens/Tasks/TaskCreateScreen';
 import ListCreateScreen from './src/screens/Lists/ListCreateScreen';
 import TaskMainScreen from './src/screens/Tasks/TasksMainScreen';
+import BackendProvider from './src/providers/BackendProvider';
 const MainStack = createNativeStackNavigator();
 
 
@@ -41,30 +42,32 @@ const App = () => {
   }
   return (
     <NavigationContainer>
-      <MainStack.Navigator
-        initialRouteName={initialRouteName}
-        screenOptions={{
-          headerShown: false,
-        }}>
-        {/* logged out pages */}
-        <MainStack.Screen name="Landing" component={LandingPageMain} />
-        <MainStack.Screen
-          name="SignUp"
-          component={SignUpPage}
-          options={{ title: 'Create Account' }}
-        />
-        <MainStack.Screen
-          name="Login"
-          component={LoginPage}
-          options={{ title: 'Login' }}
-        />
+      <BackendProvider>
+        <MainStack.Navigator
+          initialRouteName={initialRouteName}
+          screenOptions={{
+            headerShown: false,
+          }}>
+          {/* logged out pages */}
+          <MainStack.Screen name="Landing" component={LandingPageMain} />
+          <MainStack.Screen
+            name="SignUp"
+            component={SignUpPage}
+            options={{ title: 'Create Account' }}
+          />
+          <MainStack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{ title: 'Login' }}
+          />
 
-        {/* logged in pages */}
-        <MainStack.Screen name="AfterLogin" component={AfterLoginPage} />
-        <MainStack.Screen name="CreateTask" component={TaskCreateScreen} />
-        <MainStack.Screen name="CreateList" component={ListCreateScreen} />
-        <MainStack.Screen name="TaskMain" component={TaskMainScreen} />
-      </MainStack.Navigator>
+          {/* logged in pages */}
+          <MainStack.Screen name="AfterLogin" component={AfterLoginPage} />
+          <MainStack.Screen name="CreateTask" component={TaskCreateScreen} />
+          <MainStack.Screen name="CreateList" component={ListCreateScreen} />
+          <MainStack.Screen name="TaskMain" component={TaskMainScreen} />
+        </MainStack.Navigator>
+      </BackendProvider>
     </NavigationContainer>
   );
 }
