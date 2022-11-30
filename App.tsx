@@ -1,7 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import LandingPageMain from './src/navigations/LandingPage';
 import LoginPage from './src/screens/LoginPage';
 import SignUpPage from './src/screens/SignUpPage';
 import AfterLoginPage from './src/navigations/AfterLoginPage';
@@ -16,7 +15,7 @@ const MainStack = createNativeStackNavigator();
 
 const App = () => {
 
-  let initialRouteName = 'Landing';
+  let initialRouteName = 'Login';
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -36,7 +35,7 @@ const App = () => {
   if (initializing) return null;
 
   if (!user) {
-    initialRouteName = 'Landing';
+    initialRouteName = 'Login';
   } else {
     initialRouteName = 'AfterLogin';
   }
@@ -49,7 +48,6 @@ const App = () => {
             headerShown: false,
           }}>
           {/* logged out pages */}
-          <MainStack.Screen name="Landing" component={LandingPageMain} />
           <MainStack.Screen
             name="SignUp"
             component={SignUpPage}

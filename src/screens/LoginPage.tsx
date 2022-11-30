@@ -1,80 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Image,
   Alert,
-  TouchableOpacity,
   View,
   Text,
   TextInput,
-  ScrollView
+  ScrollView,
+  Button,
+  SafeAreaView
 } from 'react-native';
 import styles from '../styles/AppStyle';
-import { validateEmail } from '../helpers';
 import { useBackend } from '../providers/BackendProvider';
+
+import { Formik, ErrorMessage } from 'formik';
+import * as Yup from "yup";
+
+const loginSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(6, 'Too Short!')
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required')
+});
+
 
 const LoginPage = (props: any) => {
   const { signIn } = useBackend()
 
   const { navigation } = props;
-  const [firstRender, setFirstRender] = useState(true);
-  const [user, setUser] = useState('');
-  const [pass, setPass] = useState('');
-  const [status, setStatus] = useState('');
-
-  const [emailError, setEmailError] = useState<null | string>("")
-  const [passwordError, setPasswordError] = useState<null | string>("")
-
-
-
-  useEffect(() => {
-    if (firstRender) {
-      setFirstRender(false)
-    }
-    if (!firstRender) {
-      if (!(passwordError === null || emailError === null)) {
-        return;
-      }
-
-      setStatus('Checking Credentials....');
-      signIn(user, pass)
-        .then(() => {
-          console.log('User account signed in!');
-          navigation.navigate('AfterLogin');
-        })
-        .catch(error => {
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
-            Alert.alert('Invalid Email');
-          }
-          if (error.code === 'auth/user-not-found') {
-            Alert.alert('User Not Found!');
-          }
-        });
-    }
-  }, [emailError, passwordError])
-
-
-
-  const doLogin = () => {
-    if (user.length <= 0 || !validateEmail(user)) {
-      if (user.length <= 0) {
-        setEmailError('Email Missing')
-      }
-      else if (!validateEmail(user)) {
-        setEmailError('Not a valid eMail')
-      }
-    } else {
-      setEmailError(null)
-    }
-    if (pass.length <= 0) {
-      setPasswordError('Password Missing')
-    } else {
-      setPasswordError(null)
-    }
-  }
 
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <View style={styles.topBox}>
         <Image
           style={styles.imageDisplay}
@@ -86,54 +43,73 @@ const LoginPage = (props: any) => {
       </View>
       <ScrollView style={styles.wrapper}>
         <View style={styles.loginBox}>
-          <Text>Enter Existing Credentials to Login</Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={[styles.input, !!emailError && styles.inputError]}
-              placeholder="e-Mail"
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              onChangeText={text => {
-                setUser(text);
-              }}
-            />
-            {emailError && emailError.length > 0 && <Text style={styles.errorText}>{emailError}</Text>}
-          </View>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={[styles.input, !!passwordError && styles.inputError]}
-              placeholder="Password"
-              textContentType="password"
-              secureTextEntry={true}
-              onChangeText={text => {
-                setPass(text);
-              }}
-            />
-            {passwordError && passwordError.length > 0 && <Text style={styles.errorText}>{passwordError}</Text>}
-          </View>
-          <Text>{status}</Text>
+          <Text style={styles.textStyle}>Enter Existing Credentials to Login</Text>
+          <Formik
+            initialValues={{
+              password: '',
+              email: ''
+            }}
+            validationSchema={loginSchema}
+            onSubmit={values => {
+              // same shape as initial values
+              const { email, password } = values
+              signIn(email, password)
+                .then(() => {
+                  navigation.navigate('AfterLogin');
+                })
+                .catch(error => {
+                  if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                    Alert.alert('Invalid Email');
+                  }
+                  if (error.code === 'auth/user-not-found') {
+                    Alert.alert('User Not Found!');
+                  }
+                });
+            }}>
+            {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+              <View style={styles.wrapper}>
+                <View style={styles.inputWrapper}>
+                  <TextInput
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    keyboardType="email-address"
+                    placeholder="e-Mail"
+                    textContentType="emailAddress"
+                    style={[styles.input, !!errors.email && styles.inputError]}
+                  />
+                  <Text style={styles.errorText}>
+                    <ErrorMessage name="email" />
+                  </Text>
+                </View>
+                <View style={styles.inputWrapper}>
+                  <TextInput
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    placeholder="Password"
+                    textContentType="password"
+                    secureTextEntry={true}
+                    style={[styles.input, !!errors.password && styles.inputError]}
+                  />
+                  <Text style={styles.errorText}>
+                    <ErrorMessage name="password" />
+                  </Text>
+                </View>
+                <Button title='Sign In' onPress={handleSubmit} />
+              </View>
+            )}
+          </Formik>
         </View>
         <View>
           <View style={styles.navButtonsWrapper}>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => {
-                navigation.goBack();
-              }}>
-              <Text style={styles.buttonFont}>Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => {
-                doLogin();
-              }}>
-              <Text style={styles.buttonFont}>Login</Text>
-            </TouchableOpacity>
+            <Text>Don't have an account?</Text>
+            <Button title='Sign Up' onPress={() => { navigation.navigate('SignUp') }} />
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

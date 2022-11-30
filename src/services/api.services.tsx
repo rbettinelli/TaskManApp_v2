@@ -1,11 +1,13 @@
 import auth from '@react-native-firebase/auth';
 
 export class FirebaseCalls {
+
   signUpUser = async (
     email: string,
     password: string,
     userName: string
   ): Promise<any> => {
+    console.log('here');
     return auth().createUserWithEmailAndPassword(email, password).then((user) => {
       user.user.updateProfile({
         displayName: userName

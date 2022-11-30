@@ -11,7 +11,7 @@ const LogoutTab = (props: any) => {
     logout().then(() => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Landing' }],
+        routes: [{ name: 'Login' }],
       });
     })
   };

@@ -3,13 +3,16 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   wrapper: {
     display: 'flex',
+    flexDirection: 'column',
     flex: 1,
     width: "100%"
   },
   imageDisplay: {
-    height: 200,
-    width: 200,
-    alignSelf: 'center'
+    height: 100,
+    width: 100,
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    justifyContent: 'center'
   },
   cent: {
     alignItems: 'center',
@@ -28,9 +31,8 @@ export default StyleSheet.create({
   },
   inputWrapper: {
     display: 'flex',
-    width: "80%",
     alignItems: 'center',
-    padding: 10,
+    paddingVertical: 10,
     marginHorizontal: 20
   },
 
@@ -59,17 +61,17 @@ export default StyleSheet.create({
   },
   topBox: {
     padding: 30,
-    height: '40%',
     alignItems: 'center',
-    width: "100%"
+    width: "100%",
+    justifyContent: 'center'
   },
   botBox: {
     padding: 30,
     justifyContent: 'center'
   },
   navButtonsWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   buttonStyle: {
     backgroundColor: 'black',
