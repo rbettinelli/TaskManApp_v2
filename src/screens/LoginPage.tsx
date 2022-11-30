@@ -45,6 +45,8 @@ const LoginPage = (props: any) => {
         <View style={styles.loginBox}>
           <Text style={styles.textStyle}>Enter Existing Credentials to Login</Text>
           <Formik
+            validateOnChange={false}
+            validateOnBlur={false}
             initialValues={{
               password: '',
               email: ''
