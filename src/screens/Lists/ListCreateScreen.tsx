@@ -22,7 +22,7 @@ const ListCreateScreen = ({ navigation }: any) => {
         <Text style={styles.textStyle}>List Name:</Text>
         <TextInputView
           style={styles.input}
-          placeholder="Create List"
+          placeholder="Enter List Name"
           onChangeText={(text: string) => setQuery(text)}
         />
         <View style={styles.loginBox}>

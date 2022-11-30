@@ -45,8 +45,7 @@ const SignUpPage = (props: any) => {
       <View>
         <Text style={styles.textTitle}>Task Manager v2.0</Text>
       </View>
-      <ScrollView style={styles.wrapper}>
-
+      <ScrollView>
         <View style={styles.loginBox}>
           <Text style={styles.textStyle}>Enter Credentials to Sign Up</Text>
           <Formik
@@ -84,6 +83,7 @@ const SignUpPage = (props: any) => {
                     onBlur={handleBlur('user')}
                     value={values.user}
                     placeholder="User Name"
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.user && styles.inputError]}
                   />
                   <Text style={styles.errorText}>
@@ -98,6 +98,7 @@ const SignUpPage = (props: any) => {
                     keyboardType="email-address"
                     placeholder="e-Mail"
                     textContentType="emailAddress"
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.email && styles.inputError]}
                   />
                   <Text style={styles.errorText}>
@@ -112,6 +113,7 @@ const SignUpPage = (props: any) => {
                     placeholder="Password"
                     textContentType="password"
                     secureTextEntry={true}
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.password && styles.inputError]}
                   />
                   <Text style={styles.errorText}>
@@ -126,6 +128,7 @@ const SignUpPage = (props: any) => {
                     placeholder="Confirm Password"
                     textContentType="password"
                     secureTextEntry={true}
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.passwordConfirmation && styles.inputError]}
                   />
                   <Text style={styles.errorText}>

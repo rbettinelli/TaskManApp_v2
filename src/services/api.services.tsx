@@ -12,7 +12,7 @@ export class FirebaseCalls {
       user.user.updateProfile({
         displayName: userName
       })
-    })
+    }).catch((e) => { throw new Error(e) })
   }
 
   signIn = async (username: string, password: string): Promise<any> => {

@@ -41,7 +41,7 @@ const LoginPage = (props: any) => {
       <View>
         <Text style={styles.textTitle}>Task Manager v2.0</Text>
       </View>
-      <ScrollView style={styles.wrapper}>
+      <ScrollView>
         <View style={styles.loginBox}>
           <Text style={styles.textStyle}>Enter Existing Credentials to Login</Text>
           <Formik
@@ -79,6 +79,7 @@ const LoginPage = (props: any) => {
                     keyboardType="email-address"
                     placeholder="e-Mail"
                     textContentType="emailAddress"
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.email && styles.inputError]}
                   />
                   <Text style={styles.errorText}>
@@ -93,6 +94,7 @@ const LoginPage = (props: any) => {
                     placeholder="Password"
                     textContentType="password"
                     secureTextEntry={true}
+                    autoCapitalize="none"
                     style={[styles.input, !!errors.password && styles.inputError]}
                   />
                   <Text style={styles.errorText}>

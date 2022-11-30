@@ -50,8 +50,10 @@ export default StyleSheet.create({
     alignSelf: 'flex-start'
   },
   loginBox: {
-    padding: 30,
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 30
   },
   openPageBox: {
     height: '50%',

@@ -5,7 +5,6 @@ import ListMainScreen from '../screens/Lists/ListMainScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StatisticsMainScreen from '../screens/Statistics/StatisticsMainScreen';
 const Tabs = createBottomTabNavigator();
-Icon.loadFont();
 
 const AfterLoginPage = () => {
   return (
