@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, SafeAreaView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import Cell from '../../components/Cell';
 import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';

@@ -27,6 +27,5 @@ const BackendProvider = ({ children }: any) => {
             {children}
         </BackendContext.Provider>
     )
-
 }
 export default BackendProvider
