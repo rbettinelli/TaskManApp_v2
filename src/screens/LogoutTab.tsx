@@ -1,16 +1,17 @@
 import React from 'react';
 import { Image, TouchableOpacity, View, Text, Alert, SafeAreaView } from 'react-native';
 import PageHeader from '../components/Header';
+import { useBackend } from '../providers/BackendProvider';
 import styles from '../styles/AppStyle';
-import { Logout, userName } from '../services/api.services';
 const LogoutTab = (props: any) => {
   const { navigation } = props;
+  const { logout, userName } = useBackend()
 
   const signOut = () => {
-    Logout().then(() => {
+    logout().then(() => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Landing' }],
+        routes: [{ name: 'Login' }],
       });
     })
   };
