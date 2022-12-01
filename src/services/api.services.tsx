@@ -1,4 +1,10 @@
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
+const COLLECTIONS = {
+  lists: "Lists",
+  tasks: "Tasks"
+}
 
 export class FirebaseCalls {
 
@@ -25,4 +31,48 @@ export class FirebaseCalls {
   };
 
   userName = (): string => auth().currentUser?.displayName || "";
+
+  email = (): string => auth().currentUser?.email || "";
+
+  createList = (listName: string): Promise<any> => {
+    return firestore()
+      .collection(COLLECTIONS.lists)
+      .add({
+        listName: listName,
+        email: this.email()
+      }).then(() => {
+        console.log("Added");
+      }).catch((e) => { throw new Error(e) })
+  }
+  createTask = (taskName: string, isCompleted: boolean, listId: string): Promise<any> => {
+    return firestore()
+      .collection(COLLECTIONS.tasks)
+      .add({
+        taskName: taskName,
+        isCompleted: isCompleted,
+        email: this.email(),
+        listId: listId
+      }).then(() => {
+        console.log("Added");
+      }).catch((e) => { throw new Error(e) })
+  }
+  updateTask = (taskID: string, isCompleted: boolean): Promise<any> => {
+    return firestore()
+      .collection(COLLECTIONS.tasks)
+      .doc(taskID)
+      .update({
+        isCompleted: isCompleted,
+      })
+      .then(() => {
+        console.log('Task updated!');
+      }).catch((e) => { throw new Error(e) });
+  }
+  getAllLists = (): Promise<any> => {
+    return firestore().collection(COLLECTIONS.lists).where("email", "==", this.email()).get()
+  }
+  getAllTasks = (listId: string): Promise<any> => {
+    console.log(listId);
+
+    return firestore().collection(COLLECTIONS.tasks).where("email", "==", this.email()).where("listId", "==", listId).get()
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import CellList from '../../components/CellList';
 import PlusButton from '../../components/PlusButton';
@@ -7,19 +7,28 @@ import styles from '../../styles/AppStyle';
 import { useBackend } from '../../providers/BackendProvider';
 const ListMainScreenBusiness = (props: any) => {
   const { navigation } = props;
-  const { userName } = useBackend()
+  const { userName, getAllLists } = useBackend()
+  const [listList, setlistList] = useState<any[]>([]);
 
-  // Replace this with API...
-  const [listList, setlistList] = useState([
-    { name: 'List 1', id: '1' },
-    { name: 'List 2', id: '2' },
-    { name: 'List 3', id: '3' },
-    { name: 'List 4', id: '4' },
-    { name: 'List 5', id: '5' },
-  ]);
+
+  useEffect(() => {
+    const getLists = async () => {
+      let listArr: any[] = []
+      try {
+        const lists = await getAllLists()
+        lists.forEach((list: any) => {
+          listArr = listArr.concat({ ...list.data(), listID: list.id })
+          setlistList(listArr)
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getLists()
+  }, [])
 
   const pressHandler = (list: any) => {
-    navigation.navigate("TaskMain", { taskID: `list${list.id}` })
+    navigation.navigate("TaskMain", { listID: list.listID })
     console.log(list.id);
   };
 
@@ -35,10 +44,10 @@ const ListMainScreenBusiness = (props: any) => {
       <View style={styles.lists}>
         <FlatList
           data={listList}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.listID}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => pressHandler(item)}>
-              <CellList label={item.name} details={'0/0'} />
+              <CellList label={item.listName} details={'0/0'} />
             </TouchableOpacity>
           )}
         />
