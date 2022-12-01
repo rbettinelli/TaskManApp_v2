@@ -10,8 +10,6 @@ const ListCreateScreen = ({ navigation }: any) => {
   const [listName, setListName] = useState<string>("")
 
   const addList = async () => {
-    console.log('check hss');
-    console.log(listName);
     try {
       await createList(listName)
       Alert.alert("Confirm!", `${listName} Added!`, [{ text: "OK", onPress: () => navigation.goBack() }])

@@ -13,7 +13,6 @@ export class FirebaseCalls {
     password: string,
     userName: string
   ): Promise<any> => {
-    console.log('here');
     return auth().createUserWithEmailAndPassword(email, password).then((user) => {
       user.user.updateProfile({
         displayName: userName
@@ -70,9 +69,10 @@ export class FirebaseCalls {
   getAllLists = (): Promise<any> => {
     return firestore().collection(COLLECTIONS.lists).where("email", "==", this.email()).get()
   }
-  getAllTasks = (listId: string): Promise<any> => {
-    console.log(listId);
-
+  getAllTasksForList = (listId: string): Promise<any> => {
     return firestore().collection(COLLECTIONS.tasks).where("email", "==", this.email()).where("listId", "==", listId).get()
+  }
+  getAllTasks = (): Promise<any> => {
+    return firestore().collection(COLLECTIONS.tasks).where("email", "==", this.email()).get()
   }
 }

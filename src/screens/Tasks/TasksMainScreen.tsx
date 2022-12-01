@@ -5,11 +5,13 @@ import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
 import { useBackend } from '../../providers/BackendProvider';
+import { useIsFocused } from '@react-navigation/native';
 
 const TaskMainScreen = (props: any) => {
+  const isFocused = useIsFocused();
   const { navigation, route } = props;
   const { listID } = route.params
-  const { userName, getAllTasks, updateTask } = useBackend()
+  const { userName, getAllTasksForList, updateTask } = useBackend()
   const [taskList, settaskList] = useState<Array<any>>([]);
 
   const pressHandler = async (item: any) => {
@@ -26,11 +28,9 @@ const TaskMainScreen = (props: any) => {
     const getTasks = async () => {
       let listArr: any[] = []
       try {
-        const lists = await getAllTasks(listID)
+        const lists = await getAllTasksForList(listID)
         lists.forEach((list: any) => {
           listArr = listArr.concat({ ...list.data(), taskID: list.id })
-          console.log("Asdasda", listArr);
-
           settaskList(listArr)
         })
       } catch (error) {
@@ -38,7 +38,7 @@ const TaskMainScreen = (props: any) => {
       }
     }
     getTasks()
-  }, [])
+  }, [isFocused])
 
   return (
     <SafeAreaView style={styles.wrapper}>

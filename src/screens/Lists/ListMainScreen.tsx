@@ -5,9 +5,12 @@ import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
 import { useBackend } from '../../providers/BackendProvider';
+import { useIsFocused } from '@react-navigation/native';
+
 const ListMainScreenBusiness = (props: any) => {
+  const isFocused = useIsFocused();
   const { navigation } = props;
-  const { userName, getAllLists } = useBackend()
+  const { userName, getAllLists, getAllTasksForList } = useBackend()
   const [listList, setlistList] = useState<any[]>([]);
 
 
@@ -16,8 +19,14 @@ const ListMainScreenBusiness = (props: any) => {
       let listArr: any[] = []
       try {
         const lists = await getAllLists()
-        lists.forEach((list: any) => {
-          listArr = listArr.concat({ ...list.data(), listID: list.id })
+        lists.forEach(async (list: any) => {
+          const tasks = await getAllTasksForList(list.id)
+          listArr = listArr.concat({
+            ...list.data(),
+            listID: list.id,
+            totalTasks: tasks.size,
+            completedTasks: tasks.docs.filter((task: any) => task.data().isCompleted).length
+          })
           setlistList(listArr)
         })
       } catch (error) {
@@ -25,11 +34,10 @@ const ListMainScreenBusiness = (props: any) => {
       }
     }
     getLists()
-  }, [])
+  }, [isFocused])
 
   const pressHandler = (list: any) => {
     navigation.navigate("TaskMain", { listID: list.listID })
-    console.log(list.id);
   };
 
   return (
@@ -47,7 +55,7 @@ const ListMainScreenBusiness = (props: any) => {
           keyExtractor={item => item.listID}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => pressHandler(item)}>
-              <CellList label={item.listName} details={'0/0'} />
+              <CellList label={item.listName} details={`${item.completedTasks}/${item.totalTasks}`} />
             </TouchableOpacity>
           )}
         />
