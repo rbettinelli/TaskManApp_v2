@@ -1,17 +1,22 @@
-import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert, Button } from 'react-native';
 import TextInputView from '../../components/TextInputView';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
 import { useBackend } from '../../providers/BackendProvider';
 
 const ListCreateScreen = ({ navigation }: any) => {
-  const { userName } = useBackend()
+  const { userName, createList } = useBackend()
+  const [listName, setListName] = useState<string>("")
 
-  const setQuery = (text: string) => {
-    //Search Function.
-    console.log(text);
-  };
+  const addList = async () => {
+    try {
+      await createList(listName)
+      Alert.alert("Confirm!", `${listName} Added!`, [{ text: "OK", onPress: () => navigation.goBack() }])
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -23,12 +28,12 @@ const ListCreateScreen = ({ navigation }: any) => {
         <TextInputView
           style={styles.input}
           placeholder="Enter List Name"
-          onChangeText={(text: string) => setQuery(text)}
+          onChangeText={setListName}
         />
         <View style={styles.loginBox}>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() => Alert.alert("go back to task list")}>
+            onPress={addList}>
             <Text style={styles.buttonFont}>Add</Text>
           </TouchableOpacity>
           <TouchableOpacity

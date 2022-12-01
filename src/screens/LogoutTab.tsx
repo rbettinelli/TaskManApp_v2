@@ -35,7 +35,6 @@ const LogoutTab = (props: any) => {
               {
                 text: 'Yes',
                 onPress: () => {
-                  //console.log("User ok");
                   signOut();
                 },
               },

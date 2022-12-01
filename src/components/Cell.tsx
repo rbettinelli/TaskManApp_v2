@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   titleStyle: {
-    maxWidth: '80%',
+    maxWidth: '100%',
   },
 });
 

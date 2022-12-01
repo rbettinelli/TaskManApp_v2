@@ -1,45 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import Cell from '../../components/Cell';
 import PlusButton from '../../components/PlusButton';
 import PageHeader from '../../components/Header';
 import styles from '../../styles/AppStyle';
 import { useBackend } from '../../providers/BackendProvider';
+import { useIsFocused } from '@react-navigation/native';
 
-const tasks: { [key: string]: any } = {
-  list1: [
-    { name: 'Task 1', id: '1', selected: false },
-    { name: 'Task 2', id: '2', selected: false },
-    { name: 'Task 3', id: '3', selected: false },
-    { name: 'Task 4', id: '4', selected: false },
-    { name: 'Task 5', id: '5', selected: false },
-  ],
-  list2: [
-    { name: 'Task 10', id: '10', selected: false },
-    { name: 'Task 20', id: '20', selected: false },
-    { name: 'Task 30', id: '30', selected: false },
-    { name: 'Task 40', id: '40', selected: false },
-    { name: 'Task 50', id: '50', selected: false },
-  ],
-  list3: [
-    { name: 'Task 100', id: '100', selected: false },
-    { name: 'Task 200', id: '200', selected: false },
-    { name: 'Task 300', id: '300', selected: false },
-    { name: 'Task 400', id: '400', selected: false },
-    { name: 'Task 500', id: '500', selected: false },
-  ]
-}
 const TaskMainScreen = (props: any) => {
+  const isFocused = useIsFocused();
   const { navigation, route } = props;
-  const { taskID } = route.params
-  const { userName } = useBackend()
+  const { listID } = route.params
+  const { userName, getAllTasksForList, updateTask } = useBackend()
+  const [taskList, settaskList] = useState<Array<any>>([]);
 
-  // Replace this with API...
-  const [taskList, settaskList] = useState<Array<any>>(tasks[taskID]);
+  const pressHandler = async (item: any) => {
+    try {
+      await updateTask(item.taskID, !item.isCompleted)
+      settaskList(taskList.map((task) => task.taskID == item.taskID ? { ...task, isCompleted: !item.isCompleted } : task))
+    } catch (error) {
+      console.log(error);
 
-  const pressHandler = (item: any) => {
-    settaskList(taskList.map((task) => task.id == item.id ? { ...task, selected: !item.selected } : task))
+    }
   };
+
+  useEffect(() => {
+    const getTasks = async () => {
+      let listArr: any[] = []
+      try {
+        const lists = await getAllTasksForList(listID)
+        lists.forEach((list: any) => {
+          listArr = listArr.concat({ ...list.data(), taskID: list.id })
+          settaskList(listArr)
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getTasks()
+  }, [isFocused])
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -48,15 +47,15 @@ const TaskMainScreen = (props: any) => {
       </PageHeader>
 
       <View style={styles.plusBox}>
-        <PlusButton onPress={() => navigation.navigate('CreateTask')} />
+        <PlusButton onPress={() => navigation.navigate('CreateTask', { listID: listID })} />
       </View>
       <View style={styles.lists}>
         <FlatList
           data={taskList}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.taskID}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => pressHandler(item)}>
-              <Cell label={item.name} checked={item.selected} />
+              <Cell label={item.taskName} checked={item.isCompleted} />
             </TouchableOpacity>
           )}
         />
