@@ -18,6 +18,7 @@ Built on React Native cross platform will allow this to function on Android & IO
 Robert Bettinelli <br />
 Ozan Hasdemir <br />
 Monica Vargas Yanez <br />
+Edwin Sunny <br />
 (And others to be named later) <br />
 
 ## Final Words.  <br />
