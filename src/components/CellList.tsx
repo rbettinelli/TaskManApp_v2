@@ -18,6 +18,8 @@ export const CellList: React.FC<CellListProps> = ({ label, details }) => {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: '#FFF',
+    borderColor:'#9B5DE5',
+    borderWidth: 1,
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',

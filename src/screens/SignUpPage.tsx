@@ -39,11 +39,11 @@ const SignUpPage = (props: any) => {
       <View style={styles.topBox}>
         <Image
           style={styles.imageDisplay}
-          source={require('../assets/images/signup.jpg')}
+          source={require('../assets/images/signup.png')}
         />
       </View>
       <View>
-        <Text style={styles.textTitle}>Task Manager v2.0</Text>
+        <Text style={styles.textHeader}>Task Manager v2.0</Text>
       </View>
       <ScrollView>
         <View style={styles.loginBox}>

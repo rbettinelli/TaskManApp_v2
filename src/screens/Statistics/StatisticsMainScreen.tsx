@@ -61,7 +61,11 @@ const StatisticsMainScreen = () => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      {/* <View style={styles.topBox}>
+      </View> */}
       <View style={styles.topBox}>
+        <Text></Text>
+        <Text></Text>
         <Text style={styles.h1}>{totalCompletedPercentage}%</Text>
       </View>
       <View style={styles.bottomBox}>
@@ -72,7 +76,7 @@ const StatisticsMainScreen = () => {
           renderItem={({ item }) => (
             <View style={styles.progressBarContainer}>
               <Text style={styles.statsTaskHeading}>{item.listName}</Text>
-              <Progress.Bar progress={item.totalTasks ? item.completedTasks / item.totalTasks : 0.0} width={300} />
+              <Progress.Bar color={'#9B5DE5'} progress={item.totalTasks ? item.completedTasks / item.totalTasks : 0.0} width={300} />
             </View>
           )}
         />
@@ -87,7 +91,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
   },
   h1: {
-    fontSize: 100,
+    color: '#9B5DE5',
+    textAlign: 'center',
+    fontSize: 80,
+    // backgroundColor: '#9B5DE5',
   },
   topBox: {
     flex: 1,
@@ -102,11 +109,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   progressBarContainer: {
+    color: '#OOBBF9',
     margin: 20
+  },
+  progressBar:{
+    color: '#OOBBF9',
   },
   statsTaskHeading: {
     fontSize: 25,
-    marginVertical: 10
+    marginVertical: 10,
   }
 });
 export default StatisticsMainScreen;
