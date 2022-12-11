@@ -8,8 +8,8 @@ export default StyleSheet.create({
     width: "100%"
   },
   imageDisplay: {
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     alignSelf: 'center',
     resizeMode: 'contain',
     justifyContent: 'center'
@@ -17,12 +17,19 @@ export default StyleSheet.create({
   cent: {
     alignItems: 'center',
   },
-  textTitle: {
-    color: '#fff',
+  textTitle:{
+    color: '#495057',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 24,
-    backgroundColor: '#0a4a4b',
+    padding: 20,
+  },
+  textHeader:{
+    color: '#FFF',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 24,
+    backgroundColor: '#9B5DE5',
     padding: 20,
   },
   searchBox: {
@@ -35,12 +42,12 @@ export default StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 20
   },
-
   input: {
     width: '100%',
     padding: 15,
-    borderWidth: 1,
     borderRadius: 10,
+    borderBottomColor: '#9B5DE5',
+    borderBottomWidth: 1,
   },
   inputError: {
     borderColor: "red"
@@ -76,8 +83,8 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   buttonStyle: {
-    backgroundColor: 'black',
-    borderRadius: 10,
+    backgroundColor: '#9B5DE5',
+    borderRadius: 60,
     padding: 10,
     marginBottom: 2,
     marginHorizontal: 10,
@@ -103,6 +110,7 @@ export default StyleSheet.create({
   textStyle: {
     fontSize: 20,
     marginEnd: 10,
+    color: '#222021'
   },
   lists: {
     flex: 6,
@@ -120,5 +128,8 @@ export default StyleSheet.create({
     padding: 10,
     alignSelf: 'flex-end',
     alignItems: 'center',
+  },
+  buttonLink: {
+    color: '#9B5DE5',
   },
 });

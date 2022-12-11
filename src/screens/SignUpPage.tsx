@@ -39,11 +39,11 @@ const SignUpPage = (props: any) => {
       <View style={styles.topBox}>
         <Image
           style={styles.imageDisplay}
-          source={require('../assets/images/signup.jpg')}
+          source={require('../assets/images/signup.png')}
         />
       </View>
       <View>
-        <Text style={styles.textTitle}>Task Manager v2.0</Text>
+        <Text style={styles.textHeader}>Task Manager v2.0</Text>
       </View>
       <ScrollView>
         <View style={styles.loginBox}>
@@ -135,7 +135,7 @@ const SignUpPage = (props: any) => {
                     <ErrorMessage name="passwordConfirmation" />
                   </Text>
                 </View>
-                <Button title='Sign Up' onPress={handleSubmit}></Button>
+                <Button color={'#9B5DE5'} title='Sign Up' onPress={handleSubmit}></Button>
               </View>
             )}
           </Formik>
@@ -143,7 +143,7 @@ const SignUpPage = (props: any) => {
         <View style={styles.navButtonsWrapper}>
           <View style={styles.navButtonsWrapper}>
             <Text>Already have an account?</Text>
-            <Button title='Sign In' onPress={() => { navigation.navigate('Login') }} />
+            <Button color={'#9B5DE5'} title='Sign In' onPress={() => { navigation.navigate('Login') }} />
           </View>
         </View>
       </ScrollView >

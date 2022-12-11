@@ -24,6 +24,8 @@ const Cell: React.FC<CellProps> = ({ label, checked }) => {
 const styles = StyleSheet.create({
   cellList: {
     backgroundColor: '#FFF',
+    borderColor:'#9B5DE5',
+    borderWidth: 1,
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',

@@ -24,7 +24,7 @@ const LogoutTab = (props: any) => {
       <View style={styles.topBox}>
         <Image
           style={styles.imageDisplay}
-          source={require('../assets/images/out.jpg')}
+          source={require('../assets/images/logout.png')}
         />
       </View>
       <View style={styles.loginBox}>

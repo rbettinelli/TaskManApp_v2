@@ -9,12 +9,14 @@ const Tabs = createBottomTabNavigator();
 const AfterLoginPage = () => {
   return (
     <Tabs.Navigator screenOptions={{
+      tabBarActiveTintColor: '#9B5DE5',
       headerShown: false,
     }}>
       <Tabs.Screen
         name="route-lMain"
         component={ListMainScreen}
         options={{
+          // tabBarActiveTintColor = '#9B5DE5',
           title: 'List Main',
           tabBarIcon: ({ color }) => (
             <Icon name="list-status" size={24} color={color} />
