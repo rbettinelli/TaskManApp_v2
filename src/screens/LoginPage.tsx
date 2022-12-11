@@ -101,7 +101,7 @@ const LoginPage = (props: any) => {
                     <ErrorMessage name="password" />
                   </Text>
                 </View>
-                <Button title='Sign In' onPress={handleSubmit} />
+                <Button color={'#9B5DE5'} title='Sign In' onPress={handleSubmit} />
               </View>
             )}
           </Formik>
@@ -109,7 +109,7 @@ const LoginPage = (props: any) => {
         <View>
           <View style={styles.navButtonsWrapper}>
             <Text>Don't have an account?</Text>
-            <Button title='Sign Up' onPress={() => { navigation.navigate('SignUp') }} />
+            <Button color={'#9B5DE5'} title='Sign Up' onPress={() => { navigation.navigate('SignUp') }} />
           </View>
         </View>
       </ScrollView>

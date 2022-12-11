@@ -17,12 +17,11 @@ export default StyleSheet.create({
   cent: {
     alignItems: 'center',
   },
-  textTitle: {
-    color: '#OOBBF9',
+  textTitle:{
+    color: '#495057',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 24,
-    backgroundColor: '#OOBBF9',
     padding: 20,
   },
   textHeader:{
@@ -130,11 +129,7 @@ export default StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
-  statisticPercent: {
-    color: '#OOBBF9',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 24,
-    backgroundColor: '#OOBBF9',
+  buttonLink: {
+    color: '#9B5DE5',
   },
 });
